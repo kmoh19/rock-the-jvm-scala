@@ -2,7 +2,7 @@ package lectures.part2oop
 
 object Objects{//deleted extends App and explicitly define def main(args:Array[String]):
 
-  //SCALA DOES NOT HAVE CLASS-LEVEL FUNCTIONALITY ie. static in java instead
+  //SCALA DOES NOT HAVE CLASS-LEVEL FUNCTIONALITY ie. static in java instead (see javaplayground)
 
   object Person{// for class level functionality create singleton instance
     val N_EYES = 2
