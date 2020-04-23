@@ -18,7 +18,7 @@ abstract class MyList_Generics_Extended[+A] {
 
 }
 
-object Empty2 extends MyList_Generics_Extended[Nothing]{
+case object Empty2 extends MyList_Generics_Extended[Nothing]{
 
   def head: Nothing = throw new NoSuchElementException
   def tail: Nothing =throw new NoSuchElementException
@@ -56,7 +56,7 @@ trait MyTransformer[-A,B]{
   def transform(elem: A) :B
 }
 
-class Cons2[+A](h: A, t: MyList_Generics_Extended[A]) extends MyList_Generics_Extended[A]{
+case class Cons2[+A](h: A, t: MyList_Generics_Extended[A]) extends MyList_Generics_Extended[A]{
   def head: A = h
   def tail: MyList_Generics_Extended[A] = t
   def isEmpty:Boolean=false
@@ -95,6 +95,7 @@ class Cons2[+A](h: A, t: MyList_Generics_Extended[A]) extends MyList_Generics_Ex
 
 object ListTest2 extends App{
   val listOfIntegers: MyList_Generics_Extended[Int] = new Cons2(1, new Cons2(2, new Cons2(3,Empty2)))
+  val ClonelistOfIntegers: MyList_Generics_Extended[Int] = new Cons2(1, new Cons2(2, new Cons2(3,Empty2)))
   val anotherlistOfIntegers: MyList_Generics_Extended[Int] = new Cons2(4, new Cons2(5, new Cons2(6,Empty2)))
   val listOfStrings: MyList_Generics_Extended[String] = new Cons2("Hello",new Cons2("Scala", Empty2))
 
@@ -114,5 +115,7 @@ object ListTest2 extends App{
   println(listOfIntegers.flatMap(new MyTransformer[Int, MyList_Generics_Extended[Int]] {
     override def transform(elem: Int): MyList_Generics_Extended[Int] = new Cons2(elem, new Cons2(elem+1, Empty2))
   }).toString)
+
+  println(listOfIntegers==ClonelistOfIntegers)
 
 }
